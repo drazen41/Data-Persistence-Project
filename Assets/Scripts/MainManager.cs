@@ -42,7 +42,7 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
-         
+        BestScoreText.text = $"Best score: {BestScorePlayerName}: {BestScore}"; 
     }
 
     private void Update()
@@ -82,6 +82,7 @@ public class MainManager : MonoBehaviour
         if (m_Points > BestScore)
         {
             BestScore = m_Points;
+            BestScorePlayerName = PlayerName;
             BestScoreText.text = $"Best score: {PlayerName}: {BestScore}";
             SaveBestScore();
         }
@@ -90,7 +91,7 @@ public class MainManager : MonoBehaviour
     private void SaveBestScore()
     {
         var data = new PlayerData();
-        data.PlayerName = PlayerName;
+        data.PlayerName = BestScorePlayerName;
         data.BestScore = BestScore;
         string json = JsonUtility.ToJson(data);
 
